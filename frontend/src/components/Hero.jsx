@@ -45,7 +45,7 @@ const Hero = () => {
 </h1>
 
           <p className="text-lg text-white/50">
-            Find recipes by ingredients, fix your meal dilemmas, and spice up
+            Find recipes by ingredients and spice up
             your cooking with AI-powered suggestions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
