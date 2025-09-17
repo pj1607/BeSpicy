@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home, Mail } from "lucide-react";
 
 const menuItems = [
@@ -29,12 +28,12 @@ const Logo = () => (
 );
 
 const NavBar = () => {
-  const [isBottomMenuOpen, setBottomMenuOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = isBottomMenuOpen ? "hidden" : "auto";
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
-  }, [isBottomMenuOpen]);
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -60,7 +59,6 @@ const NavBar = () => {
 
         {/* Navbar Content */}
         <div className="flex items-center justify-between px-4 py-3 rounded-2xl bg-[#1e1e1e] border border-white/10 shadow-md">
-          {/* Logo */}
           <Logo />
 
           {/* Desktop Links */}
@@ -79,62 +77,48 @@ const NavBar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Button & Bottom Sheet */}
+      {/* Mobile Menu Button */}
       <div className="md:hidden">
         <button
-          onClick={() => setBottomMenuOpen((prev) => !prev)}
-          aria-label={isBottomMenuOpen ? "close menu" : "open menu"}
-          className="fixed right-6 bottom-6 z-[60] bg-[#1e1e1e]  p-3 rounded-2xl shadow-2xl text-white flex items-center justify-center"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="fixed right-6 bottom-6 z-60 bg-[#1e1e1e] p-3 rounded-2xl shadow-2xl text-white flex items-center justify-center transition-all hover:scale-105"
         >
-          {isBottomMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-      {/* Mobile Bottom Sheet */}
-<AnimatePresence>
-  {isBottomMenuOpen && (
-    <>
-      {/* Backdrop */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-40 bg-black/40"
-        onClick={() => setBottomMenuOpen(false)}
-        aria-hidden
-      />
+        {/* Backdrop */}
+        <div
+          className={`fixed inset-0 bg-black/40 z-50 transition-opacity ${
+            isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setMenuOpen(false)}
+        ></div>
 
-      {/* Bottom Sheet */}
-      <motion.div
-        initial={{ y: "100vh" }}
-        animate={{ y: 0 }}
-        exit={{ y: "100vh" }}
-        transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        className="fixed left-4 right-4 bottom-0 z-50 p-5 bg-white/95 md rounded-t-3xl shadow-2xl"
-      >
-        <div className="grid grid-cols-1 gap-4">
-          {menuItems.map((it) => (
-            <Link
-              key={it.name}
-              to={it.href}
-              onClick={() => setBottomMenuOpen(false)}
-              className="flex items-center gap-4 p-4 rounded-xl bg-gray-100 hover:bg-gray-200 transition-all shadow-sm"
-            >
-              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-black/80 text-white">
-                <it.Icon size={20} />
-              </div>
-              <div>
-                <div className="text-base font-semibold text-gray-900">
-                  {it.name}
+        {/* Bottom Sheet */}
+        <div
+          className={`fixed left-4 right-4 bottom-4 z-50 p-4 bg-[#1e1e1e] rounded-t-3xl shadow-xl max-h-[70vh] overflow-y-auto transform transition-transform duration-300 ${
+            isMenuOpen ? "translate-y-0" : "translate-y-full"
+          }`}
+        >
+          <div className="flex flex-col gap-3">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-3 p-3 rounded-xl border border-white/20 hover:border-white/50 transition-all"
+              >
+                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 text-white">
+                  <item.Icon size={20} />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div>
+                  <div className="text-base font-medium text-white/90">{item.name}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </motion.div>
-    </>
-  )}
-</AnimatePresence>
-
       </div>
     </>
   );
