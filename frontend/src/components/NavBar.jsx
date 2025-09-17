@@ -19,9 +19,7 @@ const Logo = () => (
     </svg>
 
     <div className="leading-4">
-      <div className="font-extrabold text-white text-lg tracking-wide">
-        BeSpicy
-      </div>
+      <div className="font-extrabold text-white text-lg tracking-wide">BeSpicy</div>
       <div className="text-xs text-white/70 -mt-0.5">Cook. Eat. Enjoy.</div>
     </div>
   </Link>
@@ -77,12 +75,13 @@ const NavBar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu */}
       <div className="md:hidden">
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="fixed right-6 bottom-6 z-60 bg-[#1e1e1e] p-3 rounded-2xl shadow-2xl text-white flex items-center justify-center transition-all hover:scale-105"
+          className="fixed right-6 bottom-6 z-[60] bg-[#1e1e1e] p-3 rounded-2xl shadow-lg text-white flex items-center justify-center transition-all hover:scale-105"
         >
           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -97,7 +96,7 @@ const NavBar = () => {
 
         {/* Bottom Sheet */}
         <div
-          className={`fixed left-4 right-4 bottom-4 z-50 p-4 bg-[#1e1e1e] rounded-t-3xl shadow-xl max-h-[70vh] overflow-y-auto transform transition-transform duration-300 ${
+          className={`fixed left-4 right-4 bottom-0 z-50 p-4 bg-[#1e1e1e] rounded-t-3xl shadow-xl max-h-[70vh] overflow-y-auto transform transition-transform duration-300 ${
             isMenuOpen ? "translate-y-0" : "translate-y-full"
           }`}
         >
