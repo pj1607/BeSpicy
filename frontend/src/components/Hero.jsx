@@ -14,8 +14,8 @@ const Hero = () => {
         <pattern
           id="diagonalLines"
           patternUnits="userSpaceOnUse"
-          width="40"
-          height="40"
+          width="20"
+          height="20"
           patternTransform="rotate(45)"
         >
           <line
