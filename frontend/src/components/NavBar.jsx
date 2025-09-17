@@ -109,7 +109,7 @@ const NavBar = () => {
         animate={{ y: 0 }}
         exit={{ y: "100vh" }}
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        className="fixed left-0 right-0 bottom-0 z-50 p-6 bg-white/95 backdrop-blur-md rounded-t-3xl shadow-2xl"
+        className="fixed left-4 right-4 bottom-0 z-50 p-5 bg-white/95 md rounded-t-3xl shadow-2xl"
       >
         <div className="grid grid-cols-1 gap-4">
           {menuItems.map((it) => (
