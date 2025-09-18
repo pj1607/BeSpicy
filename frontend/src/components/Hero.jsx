@@ -45,8 +45,7 @@ const Hero = () => {
 </h1>
 
           <p className="text-lg text-white/50">
-            Find recipes by ingredients and spice up
-            your cooking with AI-powered suggestions.
+           Your all-in-one food companion: discover recipes, track calories, find restaurants, and explore more smart cooking solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <button className="cursor-pointer px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition">
