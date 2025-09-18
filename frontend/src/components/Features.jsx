@@ -24,7 +24,7 @@ const FeatureCard = ({ title, description, Icon, subText }) => {
         </div>
       </div>
 
-      <div className="w-[99.5%] left-1/2 -translate-x-1/2 h-[50px] bg-red-500 -z-10 rounded-b-[2rem] absolute -bottom-10 [box-shadow:0_-3px_3px_0px_#00000095_inset] -translate-y-[70px] group-hover:translate-y-0 transition-transform duration-200 flex items-end justify-center gap-2 pb-4">
+      <div className="w-[99.5%] left-1/2 -translate-x-1/2 h-[50px] bg-[#d33232] -z-10 rounded-b-[2rem] absolute -bottom-10 [box-shadow:0_-3px_3px_0px_#00000095_inset] -translate-y-[70px] group-hover:translate-y-0 transition-transform duration-200 flex items-end justify-center gap-2 pb-4">
         <div className="flex items-center justify-center gap-2 font-bold text-[#ffffff]">
           <p className="text-xs">{subText}</p>
         </div>
