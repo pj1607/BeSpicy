@@ -21,6 +21,8 @@ combined_features = (
 
 vectorizer = TfidfVectorizer()
 feature_vectors = vectorizer.fit_transform(combined_features)
+import requests
+from bs4 import BeautifulSoup
 
 def fetch_image(url: str):
     try:
@@ -31,7 +33,8 @@ def fetch_image(url: str):
             return og_image["content"]
     except Exception:
         pass
-    return "https://via.placeholder.com/400x250?text=No+Image"
+    return None 
+
 
 def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int = 10):
     list_of_all_recipes = recipes_data['TranslatedRecipeName'].tolist()
@@ -44,13 +47,24 @@ def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int 
         matched_row = recipes_data[recipes_data.TranslatedRecipeName == close_match]
         if not matched_row.empty:
             index_of_recipe = matched_row['Srno'].values[0]
-            url = matched_row['URL'].values[0]
+            row = matched_row.iloc[0]  # Use the full row
+            url = row['URL']
             recommendations.append({
-                "recipe": close_match,
-                "time": None,
-                "url": url,
-                "image": fetch_image(url)
-            })
+    "recipe": close_match,
+    "time": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
+    "url": url,
+    "image": fetch_image(url),
+    "Ingredients": str(row.get('Ingredients', '')),
+    "PrepTimeInMins": int(row.get('PrepTimeInMins')) if pd.notna(row.get('PrepTimeInMins')) else None,
+    "CookTimeInMins": int(row.get('CookTimeInMins')) if pd.notna(row.get('CookTimeInMins')) else None,
+    "TotalTimeInMins": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
+    "Servings": int(row.get('Servings')) if pd.notna(row.get('Servings')) else None,
+    "Cuisine": str(row.get('Cuisine', '')),
+    "Course": str(row.get('Course', '')),
+    "Diet": str(row.get('Diet', '')),
+    "Instructions": str(row.get('Instructions', ''))
+})
+
     else:
         new_features = vectorizer.transform([user_ingredients])
         cosine_scores = cosine_similarity(new_features, feature_vectors).flatten()
@@ -59,16 +73,28 @@ def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int 
 
         for recipe in sorted_similar_recipes:
             index = recipe[0]
-            total_time = recipes_data.iloc[index]['TotalTimeInMins']
+            row = recipes_data.iloc[index]
+            total_time = row['TotalTimeInMins']
             if max_time is None or total_time <= max_time:
-                recipe_name = recipes_data.iloc[index]['TranslatedRecipeName']
-                url = recipes_data.iloc[index]['URL']
+                recipe_name = row['TranslatedRecipeName']
+                url = row['URL']
+                
                 recommendations.append({
-                    "recipe": recipe_name,
-                    "time": total_time,
-                    "url": url,
-                    "image": fetch_image(url)
-                })
+    "recipe": recipe_name,
+    "time": int(total_time) if pd.notna(total_time) else None,
+    "url": url,
+    "image": fetch_image(url),
+    "Ingredients": row.get('Ingredients', ''),
+    "PrepTimeInMins": int(row.get('PrepTimeInMins')) if pd.notna(row.get('PrepTimeInMins')) else None,
+    "CookTimeInMins": int(row.get('CookTimeInMins')) if pd.notna(row.get('CookTimeInMins')) else None,
+    "TotalTimeInMins": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
+    "Servings": int(row.get('Servings')) if pd.notna(row.get('Servings')) else None,
+    "Cuisine": str(row.get('Cuisine', '')),
+    "Course": str(row.get('Course', '')),
+    "Diet": str(row.get('Diet', '')),
+    "Instructions": str(row.get('Instructions', ''))
+})
+
                 if len(recommendations) >= top_n:
                     break
 

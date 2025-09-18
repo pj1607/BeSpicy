@@ -21,7 +21,6 @@ def recommend(
 ):
     try:
         results = get_recommendations(ingredients, max_time, top_n)
-        # Convert any numpy types to Python native types
         for r in results:
             if isinstance(r.get("time"), np.generic):
                 r["time"] = int(r["time"])
