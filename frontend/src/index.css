@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 
+
 /* Global styles */
 html, body {
 background: linear-gradient(to bottom right, #0f0f0f, #161616, #1e1e1e);
