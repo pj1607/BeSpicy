@@ -108,7 +108,7 @@ const NavBar = () => {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-3 p-3 rounded-xl border border-white/20 hover:border-white/50 transition-all"
               >
-                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 text-white">
+                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#d33232] text-white">
                   <item.Icon size={20} />
                 </div>
                 <div>

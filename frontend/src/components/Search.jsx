@@ -69,7 +69,7 @@ const SearchRecipes = () => {
         />
         <button
           onClick={handleSearch}
-          className="cursor-pointer px-6 py-3 bg-[#d33232] text-white rounded-r-full shadow-md hover:bg-red-600 transition"
+          className="cursor-pointer px-6 py-3 bg-[#d33232] text-white rounded-r-full shadow-md hover:bg-[#e09811] transition"
         >
           Search
         </button>
