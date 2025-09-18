@@ -58,11 +58,9 @@ const RecipeModal = ({ recipe, onClose }) => {
 
         {/* Recipe Title */}
         <h2 className="text-3xl font-extrabold mb-4 text-white border-b border-gray-700 pb-2">
-          {recipe.RecipeName}
+          {recipe.recipe}
         </h2>
-        {recipe.TranslatedRecipeName && (
-          <p className="mb-4 text-white/80 italic">({recipe.TranslatedRecipeName})</p>
-        )}
+      
 
         {/* Badges */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -104,9 +102,9 @@ const RecipeModal = ({ recipe, onClose }) => {
         </div>
 
         {/* Recipe Link */}
-        {recipe.URL && (
+        {recipe.url && (
           <a
-            href={recipe.URL}
+            href={recipe.url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition"

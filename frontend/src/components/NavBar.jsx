@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Home, Mail } from "lucide-react";
+import { Menu, X, Home, GripVertical } from "lucide-react";
 
 const menuItems = [
   { name: "Home", href: "/", Icon: Home },
-  { name: "Contact", href: "/contact", Icon: Mail },
+  { name: "Find Recipes", href: "/recipe", Icon: GripVertical },
 ];
 
 const Logo = () => (

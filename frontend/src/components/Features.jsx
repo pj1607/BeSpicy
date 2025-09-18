@@ -63,7 +63,7 @@ const Features = () => {
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center gap-12">
         <h2 className="text-4xl font-extrabold text-white text-center mb-10">
-          Cook. Eat. Enjoy.
+          Cook.   <span className="bg-[#d33232] text-white px-2 rounded">Eat.</span> Enjoy.
         </h2>
 
         {/* Cards */}
