@@ -15,6 +15,7 @@ const Recipe = () => {
   const [sortOption, setSortOption] = useState("Default");
 
   const RESULTS_PER_PAGE = 4;
+  const API_URL = process.env.VITE_API_URL;
 
   useEffect(() => {
     // Animate page load (fade in)
@@ -25,7 +26,7 @@ const Recipe = () => {
     setLoading(true);
     setError(null);
     try {
-      let url = `http://127.0.0.1:8000/recommend?ingredients=${encodeURIComponent(
+      let url = `${API_URL}/recommend?ingredients=${encodeURIComponent(
         ingredients.join(",")
       )}&top_n=50`;
       if (time) url += `&max_time=${time}`;
