@@ -57,7 +57,7 @@ const SearchRecipes = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 py-10 relative min-h-screen mb-15">
+  <div className="w-full max-w-3xl mx-auto px-4 py-10 relative mb-15">
       {/* Search Bar */}
       <div className="flex mb-6">
         <input
