@@ -132,8 +132,8 @@ const Recipe = () => {
               key={opt}
               value={opt}
               className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-                         hover:bg-[#d33232] hover:text-white 
-                         focus:bg-[#d33232] focus:text-white outline-none"
+                         hover:bg-[#ecebeb] hover:text-black 
+                         focus:bg-[#ffffff] focus:text-black outline-none"
             >
               <Select.ItemText>{opt} mins</Select.ItemText>
             </Select.Item>
@@ -147,7 +147,7 @@ const Recipe = () => {
 
         <button
   onClick={fetchRecipes}
-  className="cursor-pointer flex items-center justify-center gap-2 bg-[#d33232] hover:bg-[#b72c2c] text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all hover:scale-105"
+  className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition-all hover:scale-105"
 >
   <span className="flex items-center">
     <Search size={18} />
@@ -182,19 +182,19 @@ const Recipe = () => {
         className="z-50 w-full md:w-44 bg-[#1e1e1e] rounded-lg shadow-xl border border-[#333] overflow-hidden"
       >
         <Select.Viewport className="p-1">
-          <Select.Item value="Default" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+          <Select.Item value="Default" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#ffffff] hover:text-[#0e0e0e] rounded-md">
             <Select.ItemText>Default</Select.ItemText>
           </Select.Item>
-          <Select.Item value="TimeLowHigh" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+          <Select.Item value="TimeLowHigh" className="px-3 py-2 text-white text-sm cursor-pointer  hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
             <Select.ItemText>Time (Low to High)</Select.ItemText>
           </Select.Item>
-          <Select.Item value="TimeHighLow" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+          <Select.Item value="TimeHighLow" className="px-3 py-2 text-white text-sm cursor-pointer  hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
             <Select.ItemText>Time (High to Low)</Select.ItemText>
           </Select.Item>
-          <Select.Item value="FewerIngredients" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+          <Select.Item value="FewerIngredients" className="px-3 py-2 text-white text-sm cursor-pointer  hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
             <Select.ItemText>Fewer Ingredients</Select.ItemText>
           </Select.Item>
-          <Select.Item value="MoreIngredients" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+          <Select.Item value="MoreIngredients" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
             <Select.ItemText>More Ingredients</Select.ItemText>
           </Select.Item>
         </Select.Viewport>
@@ -253,7 +253,7 @@ const Recipe = () => {
 
                 <button
                   onClick={() => setSelectedRecipe(r)}
-                  className="cursor-pointer px-4 py-2 bg-[#d33232] hover:bg-red-600 text-white rounded-full font-medium transition hover:scale-105"
+                  className="cursor-pointer px-4 py-2 bg-[#ffffff] hover:bg-[#e0e0e0] text-black rounded-full font-medium transition hover:scale-105"
                 >
                   Cook Food
                 </button>

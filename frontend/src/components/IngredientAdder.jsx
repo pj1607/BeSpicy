@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Plus  } from "lucide-react"
 
 const IngredientAdder = ({ ingredients, setIngredients }) => {
   const [input, setInput] = useState("");
@@ -46,12 +47,12 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
         {ingredients.map((item) => (
           <div
             key={item}
-            className="flex items-center bg-[#d33232] text-white px-3 py-1 rounded-full text-sm"
+            className="flex items-center bg-[#ffffff] text-black px-3 py-1 rounded-full text-sm"
           >
             {item}
             <button
               onClick={() => removeIngredient(item)}
-              className="ml-2 text-white font-bold cursor-pointer"
+              className="ml-2 text-black font-bold cursor-pointer"
             >
               ×
             </button>
@@ -70,9 +71,9 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
         />
         <button
           onClick={addIngredient}
-          className="px-3 bg-[#d33232] text-white rounded-lg font-bold hover:bg-[#ff4d4d] transition"
+          className="px-3 bg-[#ffffff] text-black rounded-lg font-bold hover:bg-[#c9c9c9] transition"
         >
-          +
+         <Plus size={20}/>
         </button>
       </div>
 
