@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Search, Clock, List, ChefHat } from "lucide-react";
+import { Search, Clock, List, ChefHat,ChevronDown  } from "lucide-react";
 import RecipeModal from "../modal/RecipeModal";
 import IngredientAdder from "../components/IngredientAdder";
 import { motion } from "framer-motion"; // For animations
+import * as Select from "@radix-ui/react-select";
 
 const Recipe = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -74,6 +75,8 @@ const Recipe = () => {
   const handleNext = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
   const handlePrev = () => currentPage > 1 && setCurrentPage(currentPage - 1);
 
+    const options = ["10", "20", "30", "45", "60", "90", "120"];
+
   return (
     <section className="relative max-w-5xl mx-auto px-4 py-12 mt-30 overflow-hidden">
       {/* Decorative SVG Background */}
@@ -106,20 +109,42 @@ const Recipe = () => {
       >
         <IngredientAdder ingredients={ingredients} setIngredients={setIngredients} />
 
-        <select
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          className=" cursor-pointer w-full md:w-44 p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#1e1e1e] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition"
-        >
-          <option value="">Max Time (mins)</option>
-          <option value="10">10 mins</option>
-          <option value="20">20 mins</option>
-          <option value="30">30 mins</option>
-          <option value="45">45 mins</option>
-          <option value="60">60 mins</option>
-          <option value="90">90 mins</option>
-          <option value="120">120 mins</option>
-        </select>
+    <div className="relative w-full md:w-44">
+  <Select.Root value={time} onValueChange={setTime}>
+    <Select.Trigger
+      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition"
+      aria-label="Select max time"
+    >
+      <Select.Value placeholder="Max Time (mins)" />
+      <Select.Icon>
+        <ChevronDown className="h-4 w-4 text-gray-400" />
+      </Select.Icon>
+    </Select.Trigger>
+
+    <Select.Portal>
+      <Select.Content
+        position="popper"
+        sideOffset={4}
+        className="z-50 w-[var(--radix-select-trigger-width)] bg-[#1e1e1e] rounded-lg shadow-xl border border-[#333] overflow-hidden"
+      >
+        <Select.Viewport className="p-1">
+          {options.map((opt) => (
+            <Select.Item
+              key={opt}
+              value={opt}
+              className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+                         hover:bg-[#d33232] hover:text-white 
+                         focus:bg-[#d33232] focus:text-white outline-none"
+            >
+              <Select.ItemText>{opt} mins</Select.ItemText>
+            </Select.Item>
+          ))}
+        </Select.Viewport>
+      </Select.Content>
+    </Select.Portal>
+  </Select.Root>
+</div>
+
 
         <button
   onClick={fetchRecipes}
@@ -141,17 +166,44 @@ const Recipe = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 max-w-3xl mx-auto flex justify-end relative z-10"
         >
-          <select
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-            className="cursor-pointer p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#1e1e1e] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition"
-          >
-            <option value="Default">Default</option>
-            <option value="TimeLowHigh">Time (Low to High)</option>
-            <option value="TimeHighLow">Time (High to Low)</option>
-            <option value="FewerIngredients">Fewer Ingredients</option>
-            <option value="MoreIngredients">More Ingredients</option>
-          </select>
+          <div className="relative w-full md:w-44 z-10">
+  <Select.Root value={sortOption} onValueChange={setSortOption}>
+    <Select.Trigger
+      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition"
+      aria-label="Sort Recipes"
+    >
+      <Select.Value placeholder="Sort By" />
+      <Select.Icon>
+        <ChevronDown className="h-4 w-4 text-gray-400" />
+      </Select.Icon>
+    </Select.Trigger>
+
+    <Select.Portal>
+      <Select.Content
+        className="z-50 w-full md:w-44 bg-[#1e1e1e] rounded-lg shadow-xl border border-[#333] overflow-hidden"
+      >
+        <Select.Viewport className="p-1">
+          <Select.Item value="Default" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+            <Select.ItemText>Default</Select.ItemText>
+          </Select.Item>
+          <Select.Item value="TimeLowHigh" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+            <Select.ItemText>Time (Low to High)</Select.ItemText>
+          </Select.Item>
+          <Select.Item value="TimeHighLow" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+            <Select.ItemText>Time (High to Low)</Select.ItemText>
+          </Select.Item>
+          <Select.Item value="FewerIngredients" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+            <Select.ItemText>Fewer Ingredients</Select.ItemText>
+          </Select.Item>
+          <Select.Item value="MoreIngredients" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#d33232] rounded-md">
+            <Select.ItemText>More Ingredients</Select.ItemText>
+          </Select.Item>
+        </Select.Viewport>
+      </Select.Content>
+    </Select.Portal>
+  </Select.Root>
+</div>
+
         </motion.div>
       )}
 
