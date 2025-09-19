@@ -234,23 +234,7 @@ const Recipe = () => {
                 key={idx}
                 className="bg-[#161616] rounded-xl shadow-lg p-5 flex flex-col justify-between transition-all"
               >
-                {/* {r.image ? (
-                  <img
-                    src={r.image}
-                    alt={r.recipe}
-                    className="w-full h-40 object-cover rounded-lg mb-4"
-                  />
-                ) : (
-                  <div className="w-full h-40 flex items-center justify-center bg-gray-800 rounded-lg mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" viewBox="0 0 64 64">
-                      <path d="M12 40 C12 50, 52 50, 52 40 L52 42 C52 52, 12 52, 12 42 Z" fill="#444" />
-                      <path d="M14 40 C18 32, 46 32, 50 40 Q46 36, 32 36 Q18 36, 14 40 Z" fill="#f5f5f5" />
-                      <path d="M24 28 C25 24, 28 24, 28 20" stroke="#bbb" strokeWidth="2" fill="none" strokeLinecap="round" />
-                      <path d="M32 28 C33 24, 36 24, 36 20" stroke="#bbb" strokeWidth="2" fill="none" strokeLinecap="round" />
-                      <path d="M40 28 C41 24, 44 24, 44 20" stroke="#bbb" strokeWidth="2" fill="none" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                )} */}
+               
 
            <h2 className="flex items-center gap-2 text-xl font-bold text-[#ffffff] mb-2">
   <List size={20} className="shrink-0" />
