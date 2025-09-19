@@ -7,7 +7,8 @@ const foodSuggestions = [
   "Ridge Gourd", "Drumstick (Moringa)", "Okra (Bhindi)", "Raw Banana", "Pumpkin", 
   "Fenugreek Leaves (Methi)", "Curry Leaves", "Beetroot", "Turnip", "Colocasia (Arbi)", 
   "Radish (Mooli)", "Cluster Beans (Guar)", "Ivy Gourd (Tindora)", "Ash Gourd (Petha)", 
-  "Snake Gourd", "Amaranth Leaves", "Pointed Gourd (Parwal)", "Lotus Stem (Kamal Kakdi)",
+  "Snake Gourd", "Amaranth Leaves", "Pointed Gourd (Parwal)", "Lotus Stem (Kamal Kakdi)","Dal",
+  "Soyachunks","Egg","Bread","Rice",
 
   // 🍉 Fruits
   "Apple", "Banana", "Mango", "Orange", "Strawberry", "Blueberry", "Pineapple", "Lemon",
