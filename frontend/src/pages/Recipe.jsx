@@ -292,10 +292,10 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
 
       
      {showNoIngredients && (
-  <div className="mt-2 p-3 bg-gray-800 border-l-4 border-red-500 text-white/60 flex justify-between items-center rounded shadow-md animate-fadeIn">
+  <div className="mt-2 p-3 bg-gray-800 border-l-4 border-white text-white/60 flex justify-between items-center rounded shadow-md animate-fadeIn">
     <span>Please enter at least one ingredient to search recipes.</span>
     <button
-      className="cursor-pointer ml-4 font-bold text-xl leading-none text-red-400 hover:text-red-500 transition-colors duration-200"
+      className="cursor-pointer ml-4 font-bold text-xl leading-none text-white hover:text-red-500 transition-colors duration-200"
       onClick={() => setShowNoIngredients(false)}
     >
       &times;
