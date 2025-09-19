@@ -15,18 +15,38 @@ const Recipe = () => {
   const [error, setError] = useState(null);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [sortOption, setSortOption] = useState("Default");
+  const [searchPerformed, setSearchPerformed] = useState(false);
+
+
+  const [showNoIngredients, setShowNoIngredients] = useState(false);
+  const [lastSearchedIngredients, setLastSearchedIngredients] = useState([]);
+const [lastSearchedTime, setLastSearchedTime] = useState("");
+
 
   const RESULTS_PER_PAGE = 4;
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // Animate page load (fade in)
     document.querySelector("section").classList.add("fade-in");
   }, []);
+  useEffect(() => {
+    if (showNoIngredients) {
+      const timer = setTimeout(() => setShowNoIngredients(false), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [showNoIngredients]);
+
 
   const fetchRecipes = async () => {
+  if (!ingredients || ingredients.length === 0) {
+    setShowNoIngredients(true); 
+    return;
+  } else {
+    setShowNoIngredients(false);
+  }
   setLoading(true);
   setError(null);
+
   try {
     let url = `${API}/ml/recommend`;
     const params = {
@@ -38,6 +58,10 @@ const Recipe = () => {
     const response = await axios.get(url, { params });
     setRecipes(response.data.results || []);
     setCurrentPage(1);
+
+    setLastSearchedIngredients([...ingredients]);
+    setLastSearchedTime(time);
+    setSearchPerformed(true);
   } catch (err) {
     setError(err.response?.data?.message || err.message);
     setRecipes([]);
@@ -45,6 +69,7 @@ const Recipe = () => {
     setLoading(false);
   }
 };
+
   const sortedRecipes = [...recipes].sort((a, b) => {
     switch (sortOption) {
       case "TimeLowHigh":
@@ -194,8 +219,10 @@ const Recipe = () => {
   </span>
   <span>Search</span>
 </button>
+</motion.div>
 
-      </motion.div>
+
+
 
       {/* Sort Dropdown */}
       {recipes.length > 0 && (
@@ -262,6 +289,36 @@ const Recipe = () => {
 
         </motion.div>
       )}
+
+      
+     {showNoIngredients && (
+  <div className="mt-2 p-3 bg-gray-800 border-l-4 border-red-500 text-white/60 flex justify-between items-center rounded shadow-md animate-fadeIn">
+    <span>Please enter at least one ingredient to search recipes.</span>
+    <button
+      className="cursor-pointer ml-4 font-bold text-xl leading-none text-red-400 hover:text-red-500 transition-colors duration-200"
+      onClick={() => setShowNoIngredients(false)}
+    >
+      &times;
+    </button>
+  </div>
+)}
+{searchPerformed && !loading && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="mt-4 max-w-3xl mx-auto text-gray-300 flex flex-wrap gap-4 items-center relative z-10"
+  >
+    <p>
+      <span className="font-medium text-white">Ingredients:</span> {lastSearchedIngredients.join(", ")}
+    </p>
+    {lastSearchedTime && (
+      <p>
+        <span className="font-medium text-white">Max Time:</span> {lastSearchedTime} mins
+      </p>
+    )}
+  </motion.div>
+)}
 
       {/* Loader */}
       {loading && (

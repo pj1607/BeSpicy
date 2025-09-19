@@ -60,7 +60,7 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
         />
         <button
           onClick={addIngredient}
-          className="px-3 bg-[#ffffff] text-black rounded-lg font-bold hover:bg-[#c9c9c9] transition"
+          className="cursor-pointer px-3 bg-[#ffffff] text-black rounded-lg font-bold hover:bg-[#c9c9c9] transition"
         >
           <Plus size={20} />
         </button>
