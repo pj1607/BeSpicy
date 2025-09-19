@@ -1,9 +1,8 @@
 import pandas as pd
-import difflib
+import heapq
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import requests
-from bs4 import BeautifulSoup
+from rapidfuzz import process 
 
 # Load recipes data
 recipes_data = pd.read_csv("IndianFood.csv")
@@ -19,70 +18,54 @@ combined_features = (
     recipes_data['Diet']
 )
 
+# Vectorize once
 vectorizer = TfidfVectorizer()
 feature_vectors = vectorizer.fit_transform(combined_features)
-import requests
-from bs4 import BeautifulSoup
+
+# Pre-map recipe data to avoid iloc overhead
+recipes_dict = {
+    idx: {
+        "recipe": row["TranslatedRecipeName"],
+        "time": int(row["TotalTimeInMins"]) if pd.notna(row["TotalTimeInMins"]) else None,
+        "url": row["URL"],
+        "Ingredients": row.get("Ingredients", ""),
+        "PrepTimeInMins": int(row["PrepTimeInMins"]) if pd.notna(row["PrepTimeInMins"]) else None,
+        "CookTimeInMins": int(row["CookTimeInMins"]) if pd.notna(row["CookTimeInMins"]) else None,
+        "TotalTimeInMins": int(row["TotalTimeInMins"]) if pd.notna(row["TotalTimeInMins"]) else None,
+        "Servings": int(row["Servings"]) if pd.notna(row["Servings"]) else None,
+        "Cuisine": str(row.get("Cuisine", "")),
+        "Course": str(row.get("Course", "")),
+        "Diet": str(row.get("Diet", "")),
+        "Instructions": str(row.get("Instructions", ""))
+    }
+    for idx, row in recipes_data.iterrows()
+}
+
+list_of_all_recipes = recipes_data["TranslatedRecipeName"].tolist()
 
 
 def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int = 10):
-    list_of_all_recipes = recipes_data['TranslatedRecipeName'].tolist()
-    close_matches = difflib.get_close_matches(user_ingredients, list_of_all_recipes)
-
     recommendations = []
 
-    if close_matches:
-        close_match = close_matches[0]
-        matched_row = recipes_data[recipes_data.TranslatedRecipeName == close_match]
-        if not matched_row.empty:
-            index_of_recipe = matched_row['Srno'].values[0]
-            row = matched_row.iloc[0]  # Use the full row
-            url = row['URL']
-            recommendations.append({
-    "recipe": close_match,
-    "time": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
-    "url": url,
-    "Ingredients": str(row.get('Ingredients', '')),
-    "PrepTimeInMins": int(row.get('PrepTimeInMins')) if pd.notna(row.get('PrepTimeInMins')) else None,
-    "CookTimeInMins": int(row.get('CookTimeInMins')) if pd.notna(row.get('CookTimeInMins')) else None,
-    "TotalTimeInMins": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
-    "Servings": int(row.get('Servings')) if pd.notna(row.get('Servings')) else None,
-    "Cuisine": str(row.get('Cuisine', '')),
-    "Course": str(row.get('Course', '')),
-    "Diet": str(row.get('Diet', '')),
-    "Instructions": str(row.get('Instructions', ''))
-})
+    # Fast fuzzy match using rapidfuzz
+    match = process.extractOne(user_ingredients, list_of_all_recipes, score_cutoff=85)
+    if match:
+        recipe_name = match[0]
+        matched_row = recipes_data[recipes_data.TranslatedRecipeName == recipe_name].iloc[0]
+        index = matched_row.name
+        recommendations.append(recipes_dict[index])
+        return recommendations
 
-    else:
-        new_features = vectorizer.transform([user_ingredients])
-        cosine_scores = cosine_similarity(new_features, feature_vectors).flatten()
-        similarity_score = list(enumerate(cosine_scores))
-        sorted_similar_recipes = sorted(similarity_score, key=lambda x: x[1], reverse=True)
+    # Vector similarity search
+    new_features = vectorizer.transform([user_ingredients])
+    cosine_scores = cosine_similarity(new_features, feature_vectors).flatten()
 
-        for recipe in sorted_similar_recipes:
-            index = recipe[0]
-            row = recipes_data.iloc[index]
-            total_time = row['TotalTimeInMins']
-            if max_time is None or total_time <= max_time:
-                recipe_name = row['TranslatedRecipeName']
-                url = row['URL']
-                
-                recommendations.append({
-    "recipe": recipe_name,
-    "time": int(total_time) if pd.notna(total_time) else None,
-    "url": url,
-    "Ingredients": row.get('Ingredients', ''),
-    "PrepTimeInMins": int(row.get('PrepTimeInMins')) if pd.notna(row.get('PrepTimeInMins')) else None,
-    "CookTimeInMins": int(row.get('CookTimeInMins')) if pd.notna(row.get('CookTimeInMins')) else None,
-    "TotalTimeInMins": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
-    "Servings": int(row.get('Servings')) if pd.notna(row.get('Servings')) else None,
-    "Cuisine": str(row.get('Cuisine', '')),
-    "Course": str(row.get('Course', '')),
-    "Diet": str(row.get('Diet', '')),
-    "Instructions": str(row.get('Instructions', ''))
-})
+    # Pick top_n using heapq.nlargest instead of full sort
+    top_matches = heapq.nlargest(top_n, enumerate(cosine_scores), key=lambda x: x[1])
 
-                if len(recommendations) >= top_n:
-                    break
+    for idx, score in top_matches:
+        recipe = recipes_dict[idx]
+        if max_time is None or (recipe["time"] is not None and recipe["time"] <= max_time):
+            recommendations.append(recipe)
 
     return recommendations
