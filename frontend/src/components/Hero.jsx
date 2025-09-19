@@ -54,7 +54,7 @@ const Hero = () => {
          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
  <button
   className="cursor-pointer flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition-all hover:scale-105 w-full sm:w-auto"
-  onClick={() => navigate("/recipe")}
+  onClick={() => navigate("/find-recipes")}
 >
   <Search size={18} className="flex-shrink-0" />
   <span className="leading-none text-base">What’s Cooking?</span>

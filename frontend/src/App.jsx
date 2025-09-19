@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Recipe from "./pages/Recipe";
+import RestaurantLocator from "./pages/RestaurantLocator";
 
 const App = () => {
   return (
@@ -14,7 +15,9 @@ const App = () => {
     <main className="flex-1">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/recipe" element={<Recipe />} />
+        <Route path="/find-recipes" element={<Recipe />} />
+        <Route path="/nearest-restaurant" element={<RestaurantLocator/>} />
+
       </Routes>
     </main>
     <Footer />
