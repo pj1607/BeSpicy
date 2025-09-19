@@ -7,16 +7,20 @@ import Recipe from "./pages/Recipe";
 
 const App = () => {
   return (
-    <Router>
-      <div className="max-w-[1488px] mx-auto px-4">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/recipe" element={<Recipe />} />
-        </Routes>
-        <Footer/>
-      </div>
-    </Router>
+  // App.jsx
+<Router>
+  <div className="flex flex-col min-h-screen max-w-[1488px] mx-auto px-4">
+    <NavBar />
+    <main className="flex-1">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipe" element={<Recipe />} />
+      </Routes>
+    </main>
+    <Footer />
+  </div>
+</Router>
+
   );
 };
 

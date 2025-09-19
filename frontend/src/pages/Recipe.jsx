@@ -77,17 +77,55 @@ const Recipe = () => {
     const options = ["10", "20", "30", "45", "60", "90", "120"];
 
   return (
+   
     <section className="relative max-w-5xl mx-auto px-4 py-12 mt-30 overflow-hidden">
-      {/* Decorative SVG Background */}
-      <svg
-        className="absolute top-0 right-0 w-64 h-64 opacity-20 text-[#d33232] animate-spin-slow"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <circle cx="12" cy="12" r="10" strokeWidth="2" />
-      </svg>
-      
+   
+<div className="absolute top-0 right-0 w-64 h-64 opacity-20 ">
+  {/* Red spinning circle ring */}
+  <svg
+    className="w-full h-full"
+    fill="none"
+    stroke="#d33232"
+    viewBox="0 0 64 64"
+ 
+  >
+    <circle cx="32" cy="32" r="29" strokeWidth="5" />
+  </svg>
+
+  {/* Bowl illustration inside the circle */}
+  <div className="absolute inset-0 flex items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 64 64"
+      className="w-32 h-32 text-white"
+      fill="none"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      opacity={0.5}
+    >
+      {/* Bowl base */}
+      <path d="M8 32 C12 52, 52 52, 56 32 Z" />
+
+      {/* Wavy design inside bowl */}
+      <path d="M14 36 Q20 40, 26 36 T38 36 T50 36" />
+
+      {/* Food circles */}
+      <circle cx="20" cy="24" r="5" />
+      <circle cx="28" cy="22" r="5" />
+      <circle cx="36" cy="25" r="5" />
+      <circle cx="44" cy="22" r="5" />
+
+      {/* Spoon */}
+      <path d="M34 16 L46 6" />
+    </svg>
+     
+
+   
+  </div>
+</div>
+
 
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-10 relative z-10">
@@ -316,6 +354,7 @@ const Recipe = () => {
       {/* Modal */}
       <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
     </section>
+  
   );
 };
 
