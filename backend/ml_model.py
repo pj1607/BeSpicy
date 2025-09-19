@@ -24,16 +24,16 @@ feature_vectors = vectorizer.fit_transform(combined_features)
 import requests
 from bs4 import BeautifulSoup
 
-def fetch_image(url: str):
-    try:
-        response = requests.get(url, timeout=5)
-        soup = BeautifulSoup(response.content, "html.parser")
-        og_image = soup.find("meta", property="og:image")
-        if og_image and og_image.get("content"):
-            return og_image["content"]
-    except Exception:
-        pass
-    return None 
+# def fetch_image(url: str):
+#     try:
+#         response = requests.get(url, timeout=5)
+#         soup = BeautifulSoup(response.content, "html.parser")
+#         og_image = soup.find("meta", property="og:image")
+#         if og_image and og_image.get("content"):
+#             return og_image["content"]
+#     except Exception:
+#         pass
+#     return None 
 
 
 def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int = 10):
@@ -53,7 +53,7 @@ def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int 
     "recipe": close_match,
     "time": int(row.get('TotalTimeInMins')) if pd.notna(row.get('TotalTimeInMins')) else None,
     "url": url,
-    "image": fetch_image(url),
+    # "image": fetch_image(url),
     "Ingredients": str(row.get('Ingredients', '')),
     "PrepTimeInMins": int(row.get('PrepTimeInMins')) if pd.notna(row.get('PrepTimeInMins')) else None,
     "CookTimeInMins": int(row.get('CookTimeInMins')) if pd.notna(row.get('CookTimeInMins')) else None,
@@ -83,7 +83,7 @@ def get_recommendations(user_ingredients: str, max_time: int = None, top_n: int 
     "recipe": recipe_name,
     "time": int(total_time) if pd.notna(total_time) else None,
     "url": url,
-    "image": fetch_image(url),
+    # "image": fetch_image(url),
     "Ingredients": row.get('Ingredients', ''),
     "PrepTimeInMins": int(row.get('PrepTimeInMins')) if pd.notna(row.get('PrepTimeInMins')) else None,
     "CookTimeInMins": int(row.get('CookTimeInMins')) if pd.notna(row.get('CookTimeInMins')) else None,
