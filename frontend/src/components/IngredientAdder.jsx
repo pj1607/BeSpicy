@@ -15,14 +15,18 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
     "Cheese",
   ];
 
+  const addIngredient = () => {
+    const value = input.trim();
+    if (value && !ingredients.includes(value)) {
+      setIngredients([...ingredients, value]);
+    }
+    setInput("");
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
-      const value = input.trim();
-      if (value && !ingredients.includes(value)) {
-        setIngredients([...ingredients, value]); // notify parent
-      }
-      setInput("");
+      addIngredient();
     }
   };
 
@@ -55,14 +59,22 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
         ))}
       </div>
 
-      <input
-        type="text"
-        placeholder="Add ingredients..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={handleKeyDown}
-        className="w-full p-2 bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d33232]"
-      />
+      <div className="flex gap-2">
+        <input
+          type="text"
+          placeholder="Add ingredients..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          className="flex-1 p-2 bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d33232]"
+        />
+        <button
+          onClick={addIngredient}
+          className="px-3 bg-[#d33232] text-white rounded-lg font-bold hover:bg-[#ff4d4d] transition"
+        >
+          +
+        </button>
+      </div>
 
       {input && filteredSuggestions.length > 0 && (
         <ul className="bg-[#2a2a2a] mt-1 rounded-md max-h-40 overflow-auto">
