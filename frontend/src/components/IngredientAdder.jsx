@@ -1,20 +1,9 @@
 import React, { useState } from "react";
-import { Plus  } from "lucide-react"
+import { Plus } from "lucide-react";
+import foodSuggestions from "../data/foodSugesstions"
 
 const IngredientAdder = ({ ingredients, setIngredients }) => {
   const [input, setInput] = useState("");
-  const foodSuggestions = [
-    "Tomato",
-    "Onion",
-    "Garlic",
-    "Ginger",
-    "Chicken",
-    "Paneer",
-    "Rice",
-    "Potato",
-    "Milk",
-    "Cheese",
-  ];
 
   const addIngredient = () => {
     const value = input.trim();
@@ -73,7 +62,7 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
           onClick={addIngredient}
           className="px-3 bg-[#ffffff] text-black rounded-lg font-bold hover:bg-[#c9c9c9] transition"
         >
-         <Plus size={20}/>
+          <Plus size={20} />
         </button>
       </div>
 

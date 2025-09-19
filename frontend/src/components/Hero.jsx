@@ -52,13 +52,14 @@ const Hero = () => {
            Your all-in-one food companion: discover recipes, track calories, find restaurants, and explore more smart cooking solutions.
           </p>
          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-  <button
-    className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition-all hover:scale-105"
-    onClick={() => navigate("/recipe")}
-  >
-    <Search size={18} />
-    <span>Find recipes using ingredients</span>
-  </button>
+ <button
+  className="cursor-pointer flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition-all hover:scale-105 w-full sm:w-auto"
+  onClick={() => navigate("/recipe")}
+>
+  <Search size={18} className="flex-shrink-0" />
+  <span className="leading-none text-base">What’s Cooking?</span>
+</button>
+
 </div>
 
         </motion.div>

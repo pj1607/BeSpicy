@@ -130,8 +130,8 @@ const Recipe = () => {
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-10 relative z-10">
         <h1 className="text-4xl md:text-5xl font-extrabold text-[#ffffff] flex items-center justify-center gap-2">
-          <ChefHat size={32} /> Recipe 
-          <span className="bg-[#d33232] text-white px-2 rounded">Finder</span>
+          <ChefHat size={32} /> Find
+          <span className="bg-[#d33232] text-white px-2 rounded">Recipes</span>
         </h1>
         <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
           Enter your ingredients and cooking time to discover delicious recipes.
