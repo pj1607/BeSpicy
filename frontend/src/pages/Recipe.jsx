@@ -87,6 +87,7 @@ const Recipe = () => {
       >
         <circle cx="12" cy="12" r="10" strokeWidth="2" />
       </svg>
+      
 
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-10 relative z-10">
@@ -111,7 +112,7 @@ const Recipe = () => {
     <div className="relative w-full md:w-44">
   <Select.Root value={time} onValueChange={setTime}>
     <Select.Trigger
-      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition"
+      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none "
       aria-label="Select max time"
     >
       <Select.Value placeholder="Max Time (mins)" />
@@ -128,15 +129,16 @@ const Recipe = () => {
       >
         <Select.Viewport className="p-1">
           {options.map((opt) => (
-            <Select.Item
-              key={opt}
-              value={opt}
-              className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-                         hover:bg-[#ecebeb] hover:text-black 
-                         focus:bg-[#ffffff] focus:text-black outline-none"
-            >
-              <Select.ItemText>{opt} mins</Select.ItemText>
-            </Select.Item>
+          <Select.Item
+  key={opt}
+  value={opt}
+  className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none">
+  <Select.ItemText>{opt} mins</Select.ItemText>
+</Select.Item>
+
           ))}
         </Select.Viewport>
       </Select.Content>
@@ -168,7 +170,7 @@ const Recipe = () => {
           <div className="relative w-full md:w-44 z-10">
   <Select.Root value={sortOption} onValueChange={setSortOption}>
     <Select.Trigger
-      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition"
+      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
       aria-label="Sort Recipes"
     >
       <Select.Value placeholder="Sort By" />
@@ -178,23 +180,40 @@ const Recipe = () => {
     </Select.Trigger>
 
     <Select.Portal>
-      <Select.Content
-        className="z-50 w-full md:w-44 bg-[#1e1e1e] rounded-lg shadow-xl border border-[#333] overflow-hidden"
-      >
+       <Select.Content
+    position="popper"
+    sideOffset={4}
+    className="z-50 w-[var(--radix-select-trigger-width)] bg-[#1e1e1e] rounded-lg shadow-xl border border-[#333] overflow-hidden"
+  >
         <Select.Viewport className="p-1">
-          <Select.Item value="Default" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#ffffff] hover:text-[#0e0e0e] rounded-md">
+          <Select.Item value="Default" className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none">
             <Select.ItemText>Default</Select.ItemText>
           </Select.Item>
-          <Select.Item value="TimeLowHigh" className="px-3 py-2 text-white text-sm cursor-pointer  hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
+          <Select.Item value="TimeLowHigh"  className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none">
             <Select.ItemText>Time (Low to High)</Select.ItemText>
           </Select.Item>
-          <Select.Item value="TimeHighLow" className="px-3 py-2 text-white text-sm cursor-pointer  hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
+          <Select.Item value="TimeHighLow" className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none">
             <Select.ItemText>Time (High to Low)</Select.ItemText>
           </Select.Item>
-          <Select.Item value="FewerIngredients" className="px-3 py-2 text-white text-sm cursor-pointer  hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
+          <Select.Item value="FewerIngredients" className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none">
             <Select.ItemText>Fewer Ingredients</Select.ItemText>
           </Select.Item>
-          <Select.Item value="MoreIngredients" className="px-3 py-2 text-white text-sm cursor-pointer hover:bg-[#ffffff] hover:text-[#0e0e0e]  rounded-md">
+          <Select.Item value="MoreIngredients"  className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none">
             <Select.ItemText>More Ingredients</Select.ItemText>
           </Select.Item>
         </Select.Viewport>
