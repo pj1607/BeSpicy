@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Search, Clock, List, ChefHat,ChevronDown  } from "lucide-react";
 import RecipeModal from "../modal/RecipeModal";
 import IngredientAdder from "../components/IngredientAdder";
-import { motion } from "framer-motion"; // For animations
+import { motion } from "framer-motion";
 import * as Select from "@radix-ui/react-select";
+import axios from "axios";
 
 const Recipe = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -16,7 +17,7 @@ const Recipe = () => {
   const [sortOption, setSortOption] = useState("Default");
 
   const RESULTS_PER_PAGE = 4;
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Animate page load (fade in)
@@ -24,28 +25,26 @@ const Recipe = () => {
   }, []);
 
   const fetchRecipes = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      let url = `${API_URL}/recommend?ingredients=${encodeURIComponent(
-        ingredients.join(",")
-      )}&top_n=50`;
-      if (time) url += `&max_time=${time}`;
+  setLoading(true);
+  setError(null);
+  try {
+    let url = `${API}/ml/recommend`;
+    const params = {
+      ingredients: ingredients.join(","),
+      top_n: 50,
+    };
+    if (time) params.max_time = time;
 
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Failed to fetch recipes");
-
-      const data = await response.json();
-      setRecipes(data.results || []);
-      setCurrentPage(1);
-    } catch (err) {
-      setError(err.message);
-      setRecipes([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+    const response = await axios.get(url, { params });
+    setRecipes(response.data.results || []);
+    setCurrentPage(1);
+  } catch (err) {
+    setError(err.response?.data?.message || err.message);
+    setRecipes([]);
+  } finally {
+    setLoading(false);
+  }
+};
   const sortedRecipes = [...recipes].sort((a, b) => {
     switch (sortOption) {
       case "TimeLowHigh":
