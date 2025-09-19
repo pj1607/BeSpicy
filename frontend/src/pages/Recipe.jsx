@@ -234,7 +234,7 @@ const Recipe = () => {
                 key={idx}
                 className="bg-[#161616] rounded-xl shadow-lg p-5 flex flex-col justify-between transition-all"
               >
-                {r.image ? (
+                {/* {r.image ? (
                   <img
                     src={r.image}
                     alt={r.recipe}
@@ -250,9 +250,9 @@ const Recipe = () => {
                       <path d="M40 28 C41 24, 44 24, 44 20" stroke="#bbb" strokeWidth="2" fill="none" strokeLinecap="round" />
                     </svg>
                   </div>
-                )}
+                )} */}
 
-           <h2 className="flex items-center gap-2 text-xl font-bold text-[#d33232] mb-2">
+           <h2 className="flex items-center gap-2 text-xl font-bold text-[#ffffff] mb-2">
   <List size={20} className="shrink-0" />
   <span className="truncate">{r.recipe}</span>
 </h2>
