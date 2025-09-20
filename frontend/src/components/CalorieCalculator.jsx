@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence,motion } from "framer-motion";
-import { X, BrickWallFire, ChevronDown, CornerUpRight } from "lucide-react";
+import { X, BrickWallFire, ChevronDown, CornerUpRight ,ArrowUpFromLine} from "lucide-react";
 import * as Select from "@radix-ui/react-select";
 
 const CalorieCalculator = () => {
@@ -210,7 +210,8 @@ const genderOptions = [
             <Select.Item
               key={g.value}
               value={g.value}
-              className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-white/10 data-[highlighted]:bg-white/20 outline-none"
+              className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black  outline-none"
             >
               <Select.ItemText>{g.label}</Select.ItemText>
             </Select.Item>
@@ -335,7 +336,8 @@ const genderOptions = [
           <Select.Item
             key={level.value}
             value={level.value} // string now
-            className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-white/10 data-[highlighted]:bg-white/20 outline-none"
+            className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black  outline-none"
           >
             <Select.ItemText>{level.label}</Select.ItemText>
           </Select.Item>
@@ -361,7 +363,9 @@ const genderOptions = [
         <span className="w-2 h-2 bg-black rounded-full animate-bounce animation-delay-400"></span>
       </span>
     ) : (
-      "Calculate"
+       <>
+              <ArrowUpFromLine className="w-4 h-4 flex-shrink-0" /> Calculate
+            </>
     )}
   </button>
 </motion.form>
