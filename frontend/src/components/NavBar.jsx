@@ -91,7 +91,7 @@ const NavBar = () => {
 <div className="relative">
   <button
     onClick={() => setDropdownOpen((prev) => !prev)}
-    className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/6 transition-colors text-white/95 font-medium"
+    className="cursor-pointer flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/6 transition-colors text-white/95 font-medium"
   >
     <ChevronDown
       size={16}
@@ -106,7 +106,7 @@ const NavBar = () => {
         initial={{ opacity: 0, y: -5 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -5 }}
-        transition={{ duration: 0.15, ease: "easeOut" }}
+        transition={{ duration: 0.05, ease: "easeOut" }}
         className="absolute right-0 mt-2 w-48 bg-[#1e1e1e] rounded-xl shadow-lg overflow-hidden border border-white/10 z-50"
       >
         {menuItems.map((item) => (
@@ -114,7 +114,10 @@ const NavBar = () => {
             key={item.name}
             to={item.href}
             onClick={() => setDropdownOpen(false)}
-            className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors duration-75 text-white/90"
+            className="flex items-center gap-3 px-4 py-3  text-white text-sm cursor-pointer 
+             hover:bg-[#ecebeb] hover:text-black 
+             data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
+             outline-none"
           >
             <item.Icon size={18} />
             <span>{item.name}</span>
