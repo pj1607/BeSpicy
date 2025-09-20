@@ -31,7 +31,7 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
   }, []);
   useEffect(() => {
     if (showNoIngredients) {
-      const timer = setTimeout(() => setShowNoIngredients(false), 4000);
+      const timer = setTimeout(() => setShowNoIngredients(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [showNoIngredients]);

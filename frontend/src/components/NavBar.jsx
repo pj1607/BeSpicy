@@ -5,7 +5,7 @@ import { Menu, X, Home, UtensilsCrossed, Hotel, BrickWallFire, ChevronDown } fro
 const menuItems = [
   { name: "Find Recipes", href: "/find-recipes", Icon: UtensilsCrossed },
   { name: "Nearest Restaurant", href: "/nearest-restaurant", Icon: Hotel },
-  { name: "Calorie Calculator", href: "/tool", Icon: BrickWallFire },
+  { name: "Calorie Calculator", href: "/tools", Icon: BrickWallFire },
 ];
 
 const Logo = () => (
