@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Home, UtensilsCrossed, Hotel, BrickWallFire, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const menuItems = [
   { name: "Find Recipes", href: "/find-recipes", Icon: UtensilsCrossed },
@@ -87,40 +88,44 @@ const NavBar = () => {
             </Link>
 
             {/* Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/6 transition-all text-white/95 font-medium"
-              >
-                <ChevronDown
-                  size={16}
-                  className={`${isDropdownOpen ? "rotate-180" : "rotate-0"} transition-transform duration-200 ease-out`}
-                />
-                <span className="text-sm">Menu</span>
-              </button>
+<div className="relative">
+  <button
+    onClick={() => setDropdownOpen((prev) => !prev)}
+    className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/6 transition-colors text-white/95 font-medium"
+  >
+    <ChevronDown
+      size={16}
+      className={`${isDropdownOpen ? "rotate-180" : "rotate-0"} transition-transform duration-150 ease-out`}
+    />
+    <span className="text-sm">Menu</span>
+  </button>
 
-              {/* Dropdown Content */}
-              <div
-                style={{ willChange: "transform, opacity" }}
-                className={`absolute right-0 mt-2 w-48 bg-[#1e1e1e] rounded-xl shadow-lg overflow-hidden border border-white/10 transition duration-200 ease-out origin-top ${
-                  isDropdownOpen
-                    ? "scale-100 opacity-100 pointer-events-auto"
-                    : "scale-95 opacity-0 pointer-events-none"
-                }`}
-              >
-                {menuItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={() => setDropdownOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 hover:bg-white/6 transition-colors text-white/90"
-                  >
-                    <item.Icon size={18} />
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
+  <AnimatePresence>
+    {isDropdownOpen && (
+      <motion.div
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -5 }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
+        className="absolute right-0 mt-2 w-48 bg-[#1e1e1e] rounded-xl shadow-lg overflow-hidden border border-white/10 z-50"
+      >
+        {menuItems.map((item) => (
+          <Link
+            key={item.name}
+            to={item.href}
+            onClick={() => setDropdownOpen(false)}
+            className="flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors duration-75 text-white/90"
+          >
+            <item.Icon size={18} />
+            <span>{item.name}</span>
+          </Link>
+        ))}
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
+
+
           </div>
         </div>
       </nav>
