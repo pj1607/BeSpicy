@@ -114,21 +114,24 @@ navigator.geolocation.getCurrentPosition(
         </div>
       </div>
 
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-10 relative z-10"
-      >
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white flex items-center justify-center gap-2">
-          <Hotel className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0" /> Find
-          <span className="bg-[#d33232] text-white px-2 rounded">Restaurants</span>
-        </h1>
-        <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
-          Locate the best restaurants closest to you in just one click.
-        </p>
-      </motion.div>
+     {/* Header */}
+<motion.div
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="text-center mb-10 relative z-10"
+>
+  <h1 className="text-4xl md:text-5xl font-extrabold text-white flex flex-wrap justify-center items-center gap-2">
+    <Hotel className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0" /> Nearest
+    <span className="bg-[#d33232] text-white px-2 rounded block md:inline">
+      Restaurant
+    </span>
+  </h1>
+  <p className="text-gray-400 mt-4 text-lg max-w-2xl mx-auto">
+    Locate the best restaurants closest to you in just one click.
+  </p>
+</motion.div>
+
 
       {/* Search Bar */}
       <motion.div
