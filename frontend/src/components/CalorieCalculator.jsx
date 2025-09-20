@@ -190,7 +190,7 @@ const genderOptions = [
   <label className="block text-gray-300 mb-1">Gender</label>
   <Select.Root value={gender} onValueChange={setGender}>
     <Select.Trigger
-      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
+      className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
       aria-label="Gender"
     >
       <Select.Value placeholder="Select Gender" />
@@ -210,7 +210,7 @@ const genderOptions = [
             <Select.Item
               key={g.value}
               value={g.value}
-              className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-[#ecebeb] hover:text-black 
+              className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black  outline-none"
             >
               <Select.ItemText>{g.label}</Select.ItemText>
@@ -316,7 +316,7 @@ const genderOptions = [
   <label className="block text-gray-300 mb-1">Activity Level</label>
   <Select.Root value={activity} onValueChange={setActivity}>
   <Select.Trigger
-    className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
+    className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
     aria-label="Activity Level"
   >
     <Select.Value placeholder="Select Activity" />
@@ -336,7 +336,7 @@ const genderOptions = [
           <Select.Item
             key={level.value}
             value={level.value} // string now
-            className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-[#ecebeb] hover:text-black 
+            className="px-3 py-2 rounded-md text-white text-sm cursor-pointer hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black  outline-none"
           >
             <Select.ItemText>{level.label}</Select.ItemText>

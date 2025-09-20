@@ -115,7 +115,7 @@ const NavBar = () => {
             to={item.href}
             onClick={() => setDropdownOpen(false)}
             className="flex items-center gap-3 px-4 py-3  text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none"
           >

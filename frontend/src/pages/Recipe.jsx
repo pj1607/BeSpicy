@@ -175,7 +175,7 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
     <div className="relative w-full md:w-44">
   <Select.Root value={time} onValueChange={setTime}>
     <Select.Trigger
-      className="inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none "
+      className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none "
       aria-label="Select max time"
     >
       <Select.Value placeholder="Max Time (mins)" />
@@ -196,7 +196,7 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
   key={opt}
   value={opt}
   className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none">
   <Select.ItemText>{opt} mins</Select.ItemText>
@@ -259,31 +259,31 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
   >
         <Select.Viewport className="p-1">
           <Select.Item value="Default" className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none">
             <Select.ItemText>Default</Select.ItemText>
           </Select.Item>
           <Select.Item value="TimeLowHigh"  className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none">
             <Select.ItemText>Time (Low to High)</Select.ItemText>
           </Select.Item>
           <Select.Item value="TimeHighLow" className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none">
             <Select.ItemText>Time (High to Low)</Select.ItemText>
           </Select.Item>
           <Select.Item value="FewerIngredients" className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none">
             <Select.ItemText>Fewer Ingredients</Select.ItemText>
           </Select.Item>
           <Select.Item value="MoreIngredients"  className="px-3 py-2 rounded-md text-white text-sm cursor-pointer 
-             hover:bg-[#ecebeb] hover:text-black 
+             hover:bg-[#ffffff] hover:text-black 
              data-[highlighted]:bg-[#ffffff] data-[highlighted]:text-black 
              outline-none">
             <Select.ItemText>More Ingredients</Select.ItemText>
