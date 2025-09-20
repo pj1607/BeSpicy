@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Recipe from "./pages/Recipe";
 import RestaurantLocator from "./pages/RestaurantLocator";
+import Tools from "./pages/Tools";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/find-recipes" element={<Recipe />} />
         <Route path="/nearest-restaurant" element={<RestaurantLocator/>} />
+        <Route path="/tools" element={<Tools/>} />
 
       </Routes>
     </main>

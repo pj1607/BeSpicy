@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Home, ChefHat ,Hotel} from "lucide-react";
+import { Menu, X, Home, UtensilsCrossed, Hotel, BrickWallFire, ChevronDown } from "lucide-react";
 
 const menuItems = [
-  { name: "Home", href: "/", Icon: Home },
-  { name: "Find Recipes", href: "/find-recipes", Icon: ChefHat },
+  { name: "Find Recipes", href: "/find-recipes", Icon: UtensilsCrossed },
   { name: "Nearest Restaurant", href: "/nearest-restaurant", Icon: Hotel },
+  { name: "Calorie Calculator", href: "/tool", Icon: BrickWallFire },
 ];
 
 const Logo = () => (
@@ -28,11 +28,27 @@ const Logo = () => (
 
 const NavBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -57,28 +73,60 @@ const NavBar = () => {
         </svg>
 
         {/* Navbar Content */}
-        <div className="flex items-center justify-between px-4 py-3 rounded-2xl bg-[#1e1e1e] border border-white/10 shadow-md">
+        <div className="flex items-center justify-between px-4 py-3 rounded-2xl bg-[#1e1e1e] border border-white/10 shadow-md relative">
           <Logo />
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-3">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
+          <div className="hidden md:flex items-center gap-3 relative" ref={dropdownRef}>
+            <Link
+              to="/"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/6 transition-all text-white/95 font-medium"
+            >
+              <Home size={16} />
+              <span className="text-sm">Home</span>
+            </Link>
+
+            {/* Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setDropdownOpen((prev) => !prev)}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/6 transition-all text-white/95 font-medium"
               >
-                <item.Icon size={16} />
-                <span className="text-sm">{item.name}</span>
-              </Link>
-            ))}
+                <ChevronDown
+                  size={16}
+                  className={`${isDropdownOpen ? "rotate-180" : "rotate-0"} transition-transform duration-200 ease-out`}
+                />
+                <span className="text-sm">Menu</span>
+              </button>
+
+              {/* Dropdown Content */}
+              <div
+                style={{ willChange: "transform, opacity" }}
+                className={`absolute right-0 mt-2 w-48 bg-[#1e1e1e] rounded-xl shadow-lg overflow-hidden border border-white/10 transition duration-200 ease-out origin-top ${
+                  isDropdownOpen
+                    ? "scale-100 opacity-100 pointer-events-auto"
+                    : "scale-95 opacity-0 pointer-events-none"
+                }`}
+              >
+                {menuItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-white/6 transition-colors text-white/90"
+                  >
+                    <item.Icon size={18} />
+                    <span>{item.name}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       <div className="md:hidden">
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -87,7 +135,6 @@ const NavBar = () => {
           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        {/* Backdrop */}
         <div
           className={`fixed inset-0 bg-black/40 z-50 transition-opacity ${
             isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -95,13 +142,21 @@ const NavBar = () => {
           onClick={() => setMenuOpen(false)}
         ></div>
 
-        {/* Bottom Sheet */}
         <div
           className={`fixed left-4 right-4 bottom-0 z-50 p-4 bg-[#1e1e1e] rounded-t-3xl shadow-xl max-h-[70vh] overflow-y-auto transform transition-transform duration-300 ${
             isMenuOpen ? "translate-y-0" : "translate-y-full"
           }`}
         >
           <div className="flex flex-col gap-3">
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-3 p-3 rounded-xl border border-white/20 hover:border-white/50 transition-all"
+            >
+              <Home size={20} />
+              <div className="text-base font-medium text-white/90">Home</div>
+            </Link>
+
             {menuItems.map((item) => (
               <Link
                 key={item.name}
@@ -109,12 +164,8 @@ const NavBar = () => {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-3 p-3 rounded-xl border border-white/20 hover:border-white/50 transition-all"
               >
-               
-                  <item.Icon size={20} />
-                
-                <div>
-                  <div className="text-base font-medium text-white/90">{item.name}</div>
-                </div>
+                <item.Icon size={20} />
+                <div className="text-base font-medium text-white/90">{item.name}</div>
               </Link>
             ))}
           </div>
