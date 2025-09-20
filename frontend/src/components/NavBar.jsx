@@ -95,7 +95,7 @@ const NavBar = () => {
   >
     <ChevronDown
       size={16}
-      className={`${isDropdownOpen ? "rotate-180" : "rotate-0"} transition-transform duration-150 ease-out`}
+      className={`${isDropdownOpen ? "rotate-180" : "rotate-0"} transition-transform duration-100 ease-out`}
     />
     <span className="text-sm">Menu</span>
   </button>
