@@ -56,7 +56,7 @@ const IngredientAdder = ({ ingredients, setIngredients }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 p-2 bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d33232]"
+          className="flex-1 p-2 bg-[#1e1e1e] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#383838]"
         />
         <button
           onClick={addIngredient}

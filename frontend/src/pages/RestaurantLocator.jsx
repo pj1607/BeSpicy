@@ -143,7 +143,7 @@ navigator.geolocation.getCurrentPosition(
         <div className="relative w-full md:w-44">
           <Select.Root value={radius} onValueChange={setRadius}>
             <Select.Trigger
-              className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
+              className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#383838] transition outline-none"
               aria-label="Search Radius"
             >
               <Select.Value placeholder="Radius (m)" />

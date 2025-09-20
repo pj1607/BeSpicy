@@ -175,7 +175,7 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
     <div className="relative w-full md:w-44">
   <Select.Root value={time} onValueChange={setTime}>
     <Select.Trigger
-      className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none "
+      className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#383838] transition outline-none "
       aria-label="Select max time"
     >
       <Select.Value placeholder="Max Time (mins)" />

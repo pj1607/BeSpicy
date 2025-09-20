@@ -190,7 +190,7 @@ const genderOptions = [
   <label className="block text-gray-300 mb-1">Gender</label>
   <Select.Root value={gender} onValueChange={setGender}>
     <Select.Trigger
-      className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
+      className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#383838] transition outline-none"
       aria-label="Gender"
     >
       <Select.Value placeholder="Select Gender" />
@@ -316,7 +316,7 @@ const genderOptions = [
   <label className="block text-gray-300 mb-1">Activity Level</label>
   <Select.Root value={activity} onValueChange={setActivity}>
   <Select.Trigger
-    className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#d33232] transition outline-none"
+    className="cursor-pointer inline-flex items-center justify-between w-full p-3 rounded-lg bg-[#1e1e1e] text-white border border-[#333] focus:outline-none focus:ring-2 focus:ring-[#383838] transition outline-none"
     aria-label="Activity Level"
   >
     <Select.Value placeholder="Select Activity" />
