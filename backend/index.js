@@ -4,6 +4,7 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import mlRoutes from './routes/mlRoutes.js'
+import restaurantRoutes from "./routes/resRoutes.js"
 
 const app = express();
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use(cors({
 
 // Routes
 app.use('/ml', mlRoutes);
+app.use("/restaurants", restaurantRoutes);
 
 
 const PORT =  process.env.PORT || 4000;
