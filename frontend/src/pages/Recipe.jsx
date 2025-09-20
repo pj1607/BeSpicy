@@ -209,16 +209,23 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
   </Select.Root>
 </div>
 
-
-        <button
-  onClick={fetchRecipes}
-  className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition-all hover:scale-105"
->
-  <span className="flex items-center">
-    <Search size={18} />
-  </span>
-  <span>Search</span>
-</button>
+ <button
+          onClick={fetchRecipes}
+          disabled={loading}
+          className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold shadow-lg hover:bg-white/80 transition-all hover:scale-105"
+        >
+          {loading ? (
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-black rounded-full animate-bounce"></span>
+              <span className="w-2 h-2 bg-black rounded-full animate-bounce animation-delay-200"></span>
+              <span className="w-2 h-2 bg-black rounded-full animate-bounce animation-delay-400"></span>
+            </span>
+          ) : (
+            <>
+              <Search className="w-4 h-4 flex-shrink-0" /> Search
+            </>
+          )}
+        </button>
 </motion.div>
 
 
@@ -319,14 +326,6 @@ const [lastSearchedTime, setLastSearchedTime] = useState("");
     )}
   </motion.div>
 )}
-
-      {/* Loader */}
-      {loading && (
-        <div className="flex justify-center mt-8 relative z-10">
-          <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-[#d33232]"></div>
-        </div>
-      )}
-
       {/* Error */}
       {error && <p className="mt-6 text-red-500 text-center relative z-10">{error}</p>}
 
