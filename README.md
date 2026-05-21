@@ -1,7 +1,7 @@
 :. Bespicy
 =======
 
-A modern web platform for food lovers — discover personalized recipes, smart meal planning, and innovative cooking solutions in one place. 
+A modern web platform for food lovers - discover personalized recipes, smart meal planning, and innovative cooking solutions in one place. 
 
 Features
 --------
