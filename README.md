@@ -1,4 +1,4 @@
-:. Bespicy | ML-Powered Food Recommendation Platform
+:. Bespicy | ML-Powered Food Recommendation
 =======
 
 A modern web platform for food lovers - discover personalized recipes, smart meal planning, and innovative cooking solutions in one place. 
